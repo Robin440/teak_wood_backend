@@ -20,7 +20,7 @@ from django.urls import path
 from product.views import *
 from django.conf import settings
 from django.conf.urls.static import static
-
+from teak_admin.views import *
 urlpatterns = [
     path("admin/", admin.site.urls),
     # category urls
@@ -57,4 +57,9 @@ urlpatterns = [
     path(
         "api/product/<uuid:product_uuid>/", ProductCRUDApi.as_view(), name="product-crud"
     ),
+
+    path(
+        "api/banner/", BannerListCreateAPi.as_view(), name="banner-list-create"
+    ),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
