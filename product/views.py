@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Q
 
 # Create your views here.
 from rest_framework.views import APIView
@@ -104,21 +105,27 @@ class SubCategoryAPI(APIView):
     def post(self, request, *args, **kwargs):
         """API for creating a subcategory"""
         sub_category_serializer = SubCategorySerializers(data=request.data)
-        
+
         category_uuid = request.data.get("category")
         category = None
-        
+
         if category_uuid:
             try:
                 category = Category.objects.get(uuid=category_uuid)
             except Category.DoesNotExist:
                 return HTTP_400("Category not found in the database")
-        
+
         if sub_category_serializer.is_valid():
             sub_category_serializer.save(category=category)
-            return HTTP_200({"message": "Subcategory created successfully", "sub_category": sub_category_serializer.data})
+            return HTTP_200(
+                {
+                    "message": "Subcategory created successfully",
+                    "sub_category": sub_category_serializer.data,
+                }
+            )
         else:
             return HTTP_400({"error": sub_category_serializer.errors})
+
 
 class SubCategoryCRUDApi(APIView):
     """api for sub category CRUD"""
@@ -188,21 +195,24 @@ class SubofSubAPI(APIView):
     def post(self, request, *args, **kwargs):
         """API for creating subcategories of subcategories"""
         subs_serializer = SubofSubSerializers(data=request.data)
-        
-        sub_category_uuid = request.data.get('sub_category')
+
+        sub_category_uuid = request.data.get("sub_category")
         sub_category = None
-        
+
         if sub_category_uuid:
             try:
                 sub_category = Subcategory.objects.get(uuid=sub_category_uuid)
             except Subcategory.DoesNotExist:
                 return HTTP_400("Sorry, subcategory not found in the database")
-        
+
         if subs_serializer.is_valid():
             subs_serializer.save(sub_category=sub_category)
-            return HTTP_200({"message": "Subs of subs created", "subs_of": subs_serializer.data})
+            return HTTP_200(
+                {"message": "Subs of subs created", "subs_of": subs_serializer.data}
+            )
         else:
             return HTTP_400({"error": subs_serializer.errors})
+
 
 class SubsofSubsCRUDAPI(APIView):
     """api for subs crud operation"""
@@ -264,76 +274,105 @@ class ProductsListCreateAPIview(APIView):
     """API for list create products"""
 
     def get(self, request, *args, **kwargs):
-        """API for get products"""
-        product_instance = Product.objects.all()
+        """API for retrieving products with search functionality"""
+        query = request.GET.get(
+            "search"
+        )  # Get the search query from the request parameters
 
-        product_serializer = productSerializer(product_instance, many=True)
+        if query:
+            product_instance = Product.objects.filter(
+                Q(name__icontains=query)
+                | Q(description__icontains=query)
+                | Q(category__name__icontains=query)
+                | Q(category__subcategory__name__icontains=query)
+                | Q(category__subcategory__subofsub__name__icontains=query)
+            )
+        else:
+            product_instance = Product.objects.all()
 
-        return HTTP_200({"product": product_serializer.data})
+        product_serializer = ProductSerializer(product_instance, many=True)
+        return HTTP_200({"products": product_serializer.data})
 
-    def post(self,request,*args,**kwargs):
+    def post(self, request, *args, **kwargs):
         """API for creating products"""
-        product_serializer = productSerializer(data = request.data)
-        category_uuid = request.data.get('category')
+        product_serializer = ProductSerializer(data=request.data)
+        category_uuid = request.data.get("category")
         category = None
         if category_uuid:
             try:
-                category = Category.objects.get(uuid = category_uuid)
+                category = Category.objects.get(uuid=category_uuid)
             except Category.DoesNotExist:
-                return HTTP_400({"error":"Category not found in database"})
+                return HTTP_400({"error": "Category not found in database"})
         if not product_serializer.is_valid():
-            return HTTP_400({"error":product_serializer.errors})
-        product_serializer.save(category = category)
-        return HTTP_200({"message":"Product is created","product":product_serializer.data})
-    
+            return HTTP_400({"error": product_serializer.errors})
+        product_serializer.save(category=category)
+        return HTTP_200(
+            {"message": "Product is created", "product": product_serializer.data}
+        )
+
+
 class ProductCRUDApi(APIView):
     """API for crud operation of products"""
-    def get(self,request,*args,**kwargs):
+
+    def get(self, request, *args, **kwargs):
         """API for get products"""
-        product_uuid = kwargs.get('product_uuid')
+        product_uuid = kwargs.get("product_uuid")
         if not product_uuid:
-            return HTTP_400({"error":"Sorry ! you need to provide product uuid"})
+            return HTTP_400({"error": "Sorry ! you need to provide product uuid"})
         try:
-            product_instance = Product.objects.get(uuid = product_uuid)
+            product_instance = Product.objects.get(uuid=product_uuid)
         except Product.DoesNotExist:
-            return HTTP_400({"error":"Sorry! product is not found in database or deleted"})
-        product_serializer = productSerializer(product_instance)
-        return HTTP_200({"product":product_serializer.data})
+            return HTTP_400(
+                {"error": "Sorry! product is not found in database or deleted"}
+            )
+        product_serializer = ProductSerializer(product_instance)
+        return HTTP_200({"product": product_serializer.data})
 
-
-    def put(self,request,*args,**kwargs):
+    def put(self, request, *args, **kwargs):
         """API for updating products"""
-        product_uuid = kwargs.get('product_uuid')
+        product_uuid = kwargs.get("product_uuid")
         if not product_uuid:
-            return HTTP_400({"error":"Sorry ! you need to provide product uuid"})
+            return HTTP_400({"error": "Sorry ! you need to provide product uuid"})
         try:
-            product_instance = Product.objects.get(uuid = product_uuid)
+            product_instance = Product.objects.get(uuid=product_uuid)
         except Product.DoesNotExist:
-            return HTTP_400({"error":"Sorry! product is not found in database or deleted"})
-        category_uuid = request.data.get('category')
+            return HTTP_400(
+                {"error": "Sorry! product is not found in database or deleted"}
+            )
+        category_uuid = request.data.get("category")
         catgeory = None
-        if  category_uuid:
+        if category_uuid:
             try:
-                category = Category.objects.get(uuid = category_uuid)
+                category = Category.objects.get(uuid=category_uuid)
             except Category.DoesNotExist:
-                return HTTP_400({"error":"Sorry! Category is not found in database or deleted"})
-    
-        product_serializer = productSerializer(instance= product_instance,data = request.data, partial = True)
-        if not product_serializer.is_valid():
-            return HTTP_400({"error":product_serializer.errors})
-        product_serializer.save(category = category)
-        return HTTP_200({"message":"Product is updated successfully","product":product_serializer.data})
-        
+                return HTTP_400(
+                    {"error": "Sorry! Category is not found in database or deleted"}
+                )
 
-    def delete(self,request,*args,**kwargs):
+        product_serializer = ProductSerializer(
+            instance=product_instance, data=request.data, partial=True
+        )
+        if not product_serializer.is_valid():
+            return HTTP_400({"error": product_serializer.errors})
+        product_serializer.save(category=category)
+        return HTTP_200(
+            {
+                "message": "Product is updated successfully",
+                "product": product_serializer.data,
+            }
+        )
+
+    def delete(self, request, *args, **kwargs):
         """API for delete product"""
 
-        product_uuid = kwargs.get('product_uuid')
+        product_uuid = kwargs.get("product_uuid")
         if not product_uuid:
-            return HTTP_400({"error":"Sorry ! you need to provide product uuid"})
+            return HTTP_400({"error": "Sorry ! you need to provide product uuid"})
         try:
-            product_instance = Product.objects.get(uuid = product_uuid)
+            product_instance = Product.objects.get(uuid=product_uuid)
         except Product.DoesNotExist:
-            return HTTP_400({"error":"Sorry! product is not found in database or deleted"})
+            return HTTP_400(
+                {"error": "Sorry! product is not found in database or deleted"}
+            )
         product_instance.delete()
-        return HTTP_200({"message":"Product deleted successfully"})
+        return HTTP_200({"message": "Product deleted successfully"})

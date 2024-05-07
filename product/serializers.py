@@ -21,7 +21,7 @@ class SubofSubSerializers(serializers.ModelSerializer):
         model = SubofSub
         fields = "__all__"
 
-class productSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializers(read_only = True)
     class Meta:
         model = Product
