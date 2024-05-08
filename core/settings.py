@@ -39,11 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'teak_admin',
-    
+    'corsheaders',
     'product',
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -130,3 +131,49 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+CORS_ORIGIN_WHITELIST="http://127.0.0.1:3000"
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Add the origin URLs that you want to allow CORS requests from
+    "http://127.0.0.1:3000",
+    # Add more origins as needed
+]
+
+CORS_ALLOW_CREDENTIALS = True  
+CORS_REGEX = "^(http|https):\/\/(([a-zA-Z0-9:._-]+.(ipxp.in)[0-9:]*$)|(127.0.0.1|localhost)[a-zA-Z0-9:._-]+)"
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGIN_REGEXES = [CORS_REGEX,'http://127.0.0.1:3000','http://localhost:3000']
+
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:3000',
+    'http://localhost:3000'
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:3000',
+    'http://localhost:3000'
+]
+
+from django.core.exceptions import ImproperlyConfigured
+
+try:
+    TRUSTED_ORIGINS = "http://localhost:3000 http://127.0.0.1:3000 chrome-extension://amknoiejhlmhancpahfcfcfhllgkpbld".split(" ")
+except ImproperlyConfigured:
+    TRUSTED_ORIGINS = []
+except Exception as e:
+    TRUSTED_ORIGINS = []
+
+CSRF_TRUSTED_ORIGINS = []
+for origin in TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.append(origin)
+
+for origin in TRUSTED_ORIGINS:
+    CORS_ALLOWED_ORIGINS.append(origin)
+
+CSRF_COOKIE_SAMESITE = "Lax"
+SESSION_COOKIE_SAMESITE = "Lax"
+CSRF_COOKIE_HTTPONLY = False
+SESSION_COOKIE_HTTPONLY = True
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
