@@ -92,9 +92,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
+# Allow requests from all origins (for development purposes)
+CORS_ORIGIN_ALLOW_ALL = True
+
+
+# Optional: If you want to whitelist specific origins, use this instead:
+CORS_ORIGIN_WHITELIST = [
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+    # Add other allowed origins here
+]
+
 
 # Allow credentials (cookies, authentication headers, etc.)
 CORS_ALLOW_CREDENTIALS = True
 
-HELLO = True
 
