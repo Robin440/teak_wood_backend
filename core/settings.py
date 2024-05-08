@@ -16,9 +16,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'accounts',
     'teak_admin',
-    'corsheaders',
+    
     'product',
 ]
 
@@ -89,25 +90,15 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
-CORS_ORIGIN_WHITELIST = "http://127.0.0.1:3000"
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
-
-CORS_ALLOW_CREDENTIALS = True
-CORS_REGEX = "^(http|https):\/\/(([a-zA-Z0-9:._-]+.(ipxp.in)[0-9:]*$)|(127.0.0.1|localhost)[a-zA-Z0-9:._-]+)"
-CORS_ALLOWED_ORIGIN_REGEXES = [CORS_REGEX, 'http://127.0.0.1:3000', 'http://localhost:3000']
-
-CSRF_TRUSTED_ORIGINS = [
-    'http://127.0.0.1:3000',
-    'http://localhost:3000',
-]
-
-CSRF_COOKIE_SAMESITE = "Lax"
-SESSION_COOKIE_SAMESITE = "Lax"
-CSRF_COOKIE_HTTPONLY = False
-SESSION_COOKIE_HTTPONLY = True
-
+# Allow requests from all origins (for development purposes)
 CORS_ORIGIN_ALLOW_ALL = True
+
+# Optional: If you want to whitelist specific origins, use this instead:
+CORS_ORIGIN_WHITELIST = [
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+    # Add other allowed origins here
+]
+
+# Allow credentials (cookies, authentication headers, etc.)
 CORS_ALLOW_CREDENTIALS = True
