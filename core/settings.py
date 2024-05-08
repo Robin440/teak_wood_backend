@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-81s$xokgzcu1o^03w*2^e61a3v-a%mj^h#qk@5vsw3plke119^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['13.211.164.13', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['13.211.164.13', 'localhost', '127.0.0.1','3.27.61.24']
 
 
 
@@ -131,3 +131,12 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Add the origin URLs that you want to allow CORS requests from
+    "http://127.0.0.1:3000",
+    # Add more origins as needed
+]
+
+CORS_ALLOW_CREDENTIALS = True  
