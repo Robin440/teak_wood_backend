@@ -102,3 +102,5 @@ CORS_ORIGIN_WHITELIST = [
 
 # Allow credentials (cookies, authentication headers, etc.)
 CORS_ALLOW_CREDENTIALS = True
+
+HELLO = True
