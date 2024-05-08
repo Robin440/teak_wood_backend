@@ -43,6 +43,16 @@ class Product(models.Model):
     image_five = models.ImageField(upload_to='product_images',null = True, blank = True)
     status = models.BooleanField(default=True)
     category = models.ForeignKey(Category,on_delete=models.SET_NULL,null = True, blank = True)
+    sold_by = models.CharField(max_length=100,default="Teak Wood Factory")
+    material = models.CharField(max_length=100,default="Teak")
+    brand = models.CharField(max_length=100,default="TeakWood")
+    color  = models.CharField(max_length=100,default="Brown")
+    size = models.CharField(max_length=100,null = True, blank = True)
+    warranty = models.IntegerField(default= 2)
+    number_of_box = models.IntegerField(null = True, blank = True)
+    features = models.CharField(max_length=100,default="100 % Teakwood")
+    country_of_origin = models.CharField(max_length=100,default="Made in India")
+    video = models.FileField(upload_to='product_videos', null=True, blank=True)
     def __str__(self):
         return self.name if self.name else "Unnamed"
 
