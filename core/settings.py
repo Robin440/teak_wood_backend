@@ -92,3 +92,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
+
+# Allow credentials (cookies, authentication headers, etc.)
+CORS_ALLOW_CREDENTIALS = True
+
+HELLO = True
+
