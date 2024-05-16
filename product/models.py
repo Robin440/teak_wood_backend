@@ -53,6 +53,7 @@ class Product(models.Model):
     features = models.CharField(max_length=100,default="100 % Teakwood")
     country_of_origin = models.CharField(max_length=100,default="Made in India")
     video = models.FileField(upload_to='product_videos', null=True, blank=True)
+    is_featured = models.BooleanField(default=False)
     def __str__(self):
         return self.name if self.name else "Unnamed"
 
