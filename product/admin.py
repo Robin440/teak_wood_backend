@@ -5,6 +5,7 @@ from django.contrib import admin
 from product.models import Product, Category,Subcategory,SubofSub
 from django.utils.html import format_html
 from django.contrib.admin import SimpleListFilter
+from import_export.admin import ExportActionModelAdmin
 
 
 
@@ -76,7 +77,7 @@ admin.site.register(SubofSub, SubofSubcategoryAdmin)
 
 
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(ExportActionModelAdmin):
     """Class for product display customization""" 
 
     # add fields to diplay in user interface as list
@@ -90,7 +91,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ['name', 'price','category__name']
 
     #sort and filter
-    list_filter = ('category','price','qty','material','color')
+    list_filter = ('category','price','qty','material','color','created_at')
 
     
 

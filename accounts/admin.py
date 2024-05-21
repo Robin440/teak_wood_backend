@@ -1,7 +1,6 @@
+from django.contrib.auth.models import  Group
 from django.contrib import admin
 
-# Register your models here.
+# # Unregister the default ModelAdmin classes and register the custom ones
 
-from accounts.models import CustomUser, Banner
-
-admin.site.register(CustomUser)
+admin.site.unregister(Group)

@@ -30,13 +30,12 @@ INSTALLED_APPS = [
     "corsheaders",
     "accounts",
     "teak_admin",
-    
+    "import_export",
     "product",
 ]
 
 
-
-X_FRAME_OPTIONS = "SAMEORIGIN"              # allows you to use modals insated of popups
+X_FRAME_OPTIONS = "SAMEORIGIN"  # allows you to use modals insated of popups
 SILENCED_SYSTEM_CHECKS = ["security.W019"]  # ignores redundant warning messages
 
 MIDDLEWARE = [
@@ -156,5 +155,5 @@ CKEDITOR_CONFIGS = {
 }
 
 
-STATIC_ROOT = '/static/'
-STATIC_URL = '/static/'
+STATIC_ROOT = "/static/"
+STATIC_URL = "/static/"
