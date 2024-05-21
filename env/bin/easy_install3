@@ -1,4 +1,4 @@
-#!/home/projects/django/teak_wood/env/bin/python
+#!/home/projects/django/teak/teak_wood_backend/env/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
