@@ -159,3 +159,4 @@ admin.site.register(Product, ProductAdmin)
 
 
 admin.site.site_header = "Teakwood Factory"
+admin.site.site_url = "https://teekwood-furniture.vercel.app"
