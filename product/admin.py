@@ -107,6 +107,7 @@ class ProductAdmin(admin.ModelAdmin):
     # sort and filter
     list_filter = ("category", "price", "qty", "material", "color", "created_at")
 
+    # product info for admin panel
     fieldsets = [
         (
             "Product Information",
