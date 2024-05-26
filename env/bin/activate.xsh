@@ -28,7 +28,11 @@ def _deactivate(args):
 _deactivate(["nondestructive"])
 aliases["deactivate"] = _deactivate
 
+<<<<<<< HEAD
 $VIRTUAL_ENV = r"/home/projects/django/teak_wood_backend/teak_wood_backend/env"
+=======
+$VIRTUAL_ENV = r"/home/projects/django/teak/teak_wood_backend/env"
+>>>>>>> 1d1de08ec99b6a2ff80fc2179e3f73ae9cd48ea1
 
 $_OLD_VIRTUAL_PATH = $PATH
 $PATH = $PATH[:]
