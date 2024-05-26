@@ -98,8 +98,8 @@ class ProductAdmin(admin.ModelAdmin):
         "category",
     )  # Add 'display_image' to list_display
 
-    # pagination
-    list_per_page = 5
+    # pagination - 10 product per page
+    list_per_page = 10
 
     # search
     search_fields = ["name", "price", "category__name"]
