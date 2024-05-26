@@ -46,7 +46,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV='/home/projects/django/teak_wood/env'
+VIRTUAL_ENV='/home/projects/django/teak_wood_backend/teak_wood_backend/env'
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
