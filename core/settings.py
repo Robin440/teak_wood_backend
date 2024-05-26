@@ -20,6 +20,8 @@ ALLOWED_HOSTS = [
 
 
 INSTALLED_APPS = [
+
+    # custom interface-
     "admin_interface",
     "colorfield",   
     'django.contrib.admin',
@@ -31,7 +33,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'accounts',
     'teak_admin',
-    
     'product',
 ]
 
@@ -42,7 +43,6 @@ SILENCED_SYSTEM_CHECKS = ["security.W019"]
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
-   
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

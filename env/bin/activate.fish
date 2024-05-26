@@ -57,11 +57,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-<<<<<<< HEAD
 set -gx VIRTUAL_ENV '/home/projects/django/teak_wood_backend/teak_wood_backend/env'
-=======
-set -gx VIRTUAL_ENV '/home/projects/django/teak/teak_wood_backend/env'
->>>>>>> 1d1de08ec99b6a2ff80fc2179e3f73ae9cd48ea1
 
 # https://github.com/fish-shell/fish-shell/issues/436 altered PATH handling
 if test (echo $FISH_VERSION | head -c 1) -lt 3

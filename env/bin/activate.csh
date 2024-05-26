@@ -10,11 +10,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-<<<<<<< HEAD
 setenv VIRTUAL_ENV '/home/projects/django/teak_wood_backend/teak_wood_backend/env'
-=======
-setenv VIRTUAL_ENV '/home/projects/django/teak/teak_wood_backend/env'
->>>>>>> 1d1de08ec99b6a2ff80fc2179e3f73ae9cd48ea1
 
 set _OLD_VIRTUAL_PATH="$PATH:q"
 setenv PATH "$VIRTUAL_ENV:q/bin:$PATH:q"
