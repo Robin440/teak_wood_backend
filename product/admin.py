@@ -5,7 +5,7 @@ from django.contrib import admin
 from product.models import Product, Category, Subcategory, SubofSub
 from django.utils.html import format_html
 from django.contrib.admin import SimpleListFilter
-from import_export.admin import ExportActionModelAdmin
+# from import_export.admin import ExportActionModelAdmin
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -86,7 +86,7 @@ class SubofSubcategoryAdmin(admin.ModelAdmin):
 admin.site.register(SubofSub, SubofSubcategoryAdmin)
 
 
-class ProductAdmin(ExportActionModelAdmin):
+class ProductAdmin(admin.ModelAdmin):
     """Class for product display customization"""
 
     # add fields to diplay in user interface as list
