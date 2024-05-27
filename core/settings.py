@@ -16,7 +16,9 @@ ALLOWED_HOSTS = [
     "54.153.175.73",
     "api.ipify.org",
     "www.shadowserver.org",
-    ".vercel.app"
+    ".vercel.app",
+    "6d37-36-255-87-0.ngrok-free.app",
+    "stirred-monkfish-luckily.ngrok-free.app"
 ]
 
 
@@ -35,6 +37,7 @@ INSTALLED_APPS = [
     'accounts',
     'teak_admin',
     'product',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 
@@ -146,7 +149,7 @@ CORS_ORIGIN_WHITELIST = [
 CORS_ALLOW_CREDENTIALS = True
 
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://localhost:3001"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://localhost:3001","https://6d37-36-255-87-0.ngrok-free.app","https://stirred-monkfish-luckily.ngrok-free.app"]
 
 
 # settings.py
