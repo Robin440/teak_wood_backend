@@ -16,6 +16,7 @@ ALLOWED_HOSTS = [
     "54.153.175.73",
     "api.ipify.org",
     "www.shadowserver.org",
+    ".vercel.app"
 ]
 
 
