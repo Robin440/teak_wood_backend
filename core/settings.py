@@ -18,28 +18,26 @@ ALLOWED_HOSTS = [
     "www.shadowserver.org",
     ".vercel.app",
     "6d37-36-255-87-0.ngrok-free.app",
-    "stirred-monkfish-luckily.ngrok-free.app"
+    "stirred-monkfish-luckily.ngrok-free.app",
 ]
 
 
 INSTALLED_APPS = [
-
     # custom interface-
     "admin_interface",
-    "colorfield",   
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'corsheaders',
-    'accounts',
-    'teak_admin',
-    'product',
-    'django_cleanup.apps.CleanupConfig',
+    "colorfield",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "corsheaders",
+    "accounts",
+    "teak_admin",
+    "product",
+    "django_cleanup.apps.CleanupConfig",
 ]
-
 
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
@@ -47,14 +45,14 @@ SILENCED_SYSTEM_CHECKS = ["security.W019"]
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
-    'django.middleware.security.SecurityMiddleware',
+    "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -121,6 +119,7 @@ CORS_ALLOW_HEADERS = [
     "user-agent",
     "x-csrftoken",
     "x-requested-with",
+    "ngrok-skip-browser-warning",
 ]
 
 CORS_ALLOW_METHODS = [
@@ -149,7 +148,12 @@ CORS_ORIGIN_WHITELIST = [
 CORS_ALLOW_CREDENTIALS = True
 
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://localhost:3001","https://6d37-36-255-87-0.ngrok-free.app","https://stirred-monkfish-luckily.ngrok-free.app"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "https://6d37-36-255-87-0.ngrok-free.app",
+    "https://stirred-monkfish-luckily.ngrok-free.app",
+]
 
 
 # settings.py
