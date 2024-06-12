@@ -1,0 +1,28 @@
+version: '3'
+services:
+
+  t_django:
+    image: python:3.9.18
+    working_dir: /code
+    volumes: 
+      - .:/code
+    ports:
+      - "8009:8009"
+    depends_on:
+      - t_db
+    entrypoint: /code/entrypoint.sh
+    container_name: tdjango
+    restart: unless-stopped
+
+  t_db:
+    image: postgres:14.0-alpine
+    volumes:
+      - ./db-data/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: teak_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5438:5438"
+    container_name: "t_db"
+    restart: unless-stopped
